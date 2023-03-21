@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { useRouter } from "next/router";
 import ArtPieceDetails from "./[slug]";
+
 jest.mock("next/router", () => ({
   useRouter() {
     return {
       push: jest.fn(),
+      asPath: "/",
     };
   },
 }));
