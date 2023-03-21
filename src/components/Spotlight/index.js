@@ -23,7 +23,7 @@ export default function Spotlight () {
                height={400}
                 width={300}
                ></Image> 
-               <h3 key= {Math.random()}>Spotlight: @{currentArtist.name}</h3>     
+               <h3 key= {Math.random()}>Spotlight: @{currentArtist.artist}</h3>     
               </>
       )
   }
