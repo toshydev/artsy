@@ -1,8 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import { useRouter } from "next/router";
 import ArtPieceDetails from "./[slug]";
+jest.mock("next/router", () => ({ 
+    useRouter(){
+        return {
+            push: jest.fn()
+        }
+    }
+}))
 
-// eslint-disable-next-line jest/no-commented-out-tests
-/*test("renders image, title, artist, year, genre", ()=>{
+    test("renders image, title, artist, year, genre", ()=>{
     render(<ArtPieceDetails name={"DaVinci"} dimensions={{}}/>)
         const title = screen.getByRole("heading", {
             name: /title/i
@@ -17,7 +24,7 @@ import ArtPieceDetails from "./[slug]";
         expect(genre).toBeInTheDocument()
         expect(image).toBeInTheDocument()
     expect(artist).toBeInTheDocument()
-})*/
+})
 
 test("renders button", ()=>{
     render(<ArtPieceDetails name={"DaVinci"} dimensions={{}}/>)
