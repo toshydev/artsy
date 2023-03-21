@@ -4,20 +4,22 @@ import styled from "styled-components";
 const StyledNav = styled.nav`
   position: fixed;
   bottom: 0;
-  background: grey;
+  background: white;
   width: 100vw;
   height: 4rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
   box-shadow: 0 0 8px;
 `;
 
 const StyledNavLink = styled(Link)`
   text-decoration: none;
   color: unset;
-  background: 
+  text-align: center;
+  align-self: center;
+  flex-grow: 1;
+  height: 100%;
+  transition: 0.1s ease-in;
 
   &:hover {
     background: hotpink;
