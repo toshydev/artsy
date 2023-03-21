@@ -2,6 +2,7 @@ import GlobalStyle from "@/styles";
 import useSWR, { SWRConfig } from "swr";
 import Layout from "@/components/Layout";
 
+
 const fetcher = async (url) => {
   const response = await fetch(url);
 
