@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import ArtPieceDetails from "./[slug]";
 
+// eslint-disable-next-line jest/no-commented-out-tests
 /*test("renders image, title, artist, year, genre", ()=>{
     render(<ArtPieceDetails name={"DaVinci"} dimensions={{}}/>)
         const title = screen.getByRole("heading", {
