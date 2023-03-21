@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function ArtPieceDetails({imageSource, name, artist, year, genre, dimensions}) {
-        const router = useRouter();
+        //const router = useRouter();
         return (
             <div>
                 <button type="button" aria-label="back to art pieces list" onClick={null}>
