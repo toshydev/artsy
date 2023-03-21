@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ArtPieceDetails from "./[slug]";
+import ArtPieceDetails from ".";
 
 /* jest.mock("next/router", () => ({
   useRouter() {
