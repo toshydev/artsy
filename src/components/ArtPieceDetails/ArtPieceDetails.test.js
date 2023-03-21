@@ -1,14 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import ArtPieceDetails from ".";
+import ArtPieceDetails from "../../pages/art-pieces";
 
-/* jest.mock("next/router", () => ({
+jest.mock("next/router", () => ({
   useRouter() {
     return {
       push: jest.fn(),
       asPath: "/",
     };
   },
-})); */
+}));
 
 test("renders image, title, artist, year, genre", () => {
   render(<ArtPieceDetails name={"DaVinci"} dimensions={{}} />);
