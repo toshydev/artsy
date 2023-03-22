@@ -1,7 +1,6 @@
 import { uid } from "uid";
 
 export default function Comments({ comments }) {
-  console.log("Comments: ", comments);
   return (
     <section>
       <h3>Comments</h3>

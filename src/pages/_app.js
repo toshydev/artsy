@@ -1,7 +1,7 @@
 import GlobalStyle from "@/styles";
 import useSWR, { SWRConfig } from "swr";
 import Layout from "@/components/Layout";
-import { useImmer } from "use-immer";
+import { useImmerLocalStorageState } from "@/hook/useImmerLocalStorageState";
 
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -24,7 +24,10 @@ export default function App({ Component, pageProps }) {
     isLoading,
   } = useSWR("https://example-apis.vercel.app/api/art", fetcher);
 
-  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmerLocalStorageState(
+    "art-pieces-info",
+    { defaultValue: [] }
+  );
   const favoriteSlugs = artPiecesInfo
     .filter((piece) => piece.isFavorite)
     .map((favoritePiece) => favoritePiece.slug);
