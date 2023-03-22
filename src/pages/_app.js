@@ -18,10 +18,41 @@ const fetcher = async (url) => {
 };
 
 export default function App({ Component, pageProps }) {
-  const { data, error, isLoading } = useSWR(
-    "https://example-apis.vercel.app/api/art",
-    fetcher
-  );
+  const {
+    data: piecesData,
+    error,
+    isLoading,
+  } = useSWR("https://example-apis.vercel.app/api/art", fetcher);
+
+  const [piecesInfo, updatePiecesInfo] = useImmer([]);
+
+  function handleToggleFavorite(slug) {
+    updatePiecesInfo((draft) => {
+      const piece = draft.find((piece) => piece.slug === slug);
+      if (piece) {
+        piece.isFavorite = !piece.isFavorite;
+      } else {
+        draft.push({ ...piece, isFavorite: true });
+      }
+    });
+  }
+
+  function handleAddComment(slug) {
+    const currentDate = new Date().toLocaleDateString("de-DE");
+    const currentTime = new Date().toJSON().slice(11, 19);
+    updatePiecesInfo((draft) => {
+      const piece = draft.find((piece) => piece.slug === slug);
+      if (piece) {
+        piece.comments += {
+          text: comment,
+          date: currentDate,
+          time: currentTime,
+        };
+      } else {
+        draft.push({ ...piece, comments: [] });
+      }
+    });
+  }
 
   const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
 
