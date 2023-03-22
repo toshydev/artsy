@@ -23,10 +23,10 @@ export default function App({ Component, pageProps }) {
     fetcher
   );
 
-  const [piecesInfo, updatePiecesInfo] = useImmer([]);
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
 
   function handleToggleFavourite(slug) {
-    updatePiecesInfo((draft) => {
+    updateArtPiecesInfo((draft) => {
       const piece = draft.find((piece) => piece.slug === slug);
       if (piece) {
         piece.isFavourite = !piece.isFavourite;
@@ -43,7 +43,12 @@ export default function App({ Component, pageProps }) {
     <Layout>
       <GlobalStyle />
       <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} pieces={data} />
+        <Component
+          {...pageProps}
+          pieces={data}
+          artPiecesInfo={artPiecesInfo}
+          onToggleFavourite={handleToggleFavourite}
+        />
       </SWRConfig>
     </Layout>
   );
