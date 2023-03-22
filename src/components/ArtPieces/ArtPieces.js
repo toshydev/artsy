@@ -1,16 +1,18 @@
-import ArtPiecePreview from "../ArtPiecePreview/ArtPiecePreview";
+import Link from "next/link";
+import ArtPiecePreview from "../ArtPiecePreview";
 
 export default function ArtPieces({ pieces }) {
   return (
     <>
       {pieces.map((piece) => {
         return (
-          <ArtPiecePreview
-            key={piece.slug}
-            imageSource={piece.imageSource}
-            name={piece.name}
-            artist={piece.artist}
-          />
+          <Link key={piece.slug} href={`/art-pieces/${piece.slug}`}>
+            <ArtPiecePreview
+              imageSource={piece.imageSource}
+              name={piece.name}
+              artist={piece.artist}
+            />
+          </Link>
         );
       })}
     </>
