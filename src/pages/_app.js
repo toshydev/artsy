@@ -1,7 +1,7 @@
 import GlobalStyle from "@/styles";
 import useSWR, { SWRConfig } from "swr";
 import Layout from "@/components/Layout";
-
+import { useImmer } from "use-immer";
 
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -22,6 +22,19 @@ export default function App({ Component, pageProps }) {
     "https://example-apis.vercel.app/api/art",
     fetcher
   );
+
+  const [piecesInfo, updatePiecesInfo] = useImmer([]);
+
+  function handleToggleFavourite(slug) {
+    updatePiecesInfo((draft) => {
+      const piece = draft.find((piece) => piece.slug === slug);
+      if (piece) {
+        piece.isFavourite = !piece.isFavourite;
+      } else {
+        draft.push({ slug, isFavourite: true });
+      }
+    });
+  }
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
