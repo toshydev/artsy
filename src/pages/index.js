@@ -4,10 +4,10 @@ import Spotlight from "@/components/Spotlight";
 
 
 
-export default function HomePage() {
+export default function HomePage({pieces}) {
   return (
     <div>
-      <Spotlight/>
+      <Spotlight pieces={pieces}/>
 
     </div>
   );
