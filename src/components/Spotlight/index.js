@@ -12,7 +12,7 @@ export default function Spotlight({ pieces }) {
         height={400}
         width={300}
       ></Image>
-      <h3 key={currentPiece.slug}>Spotlight: @{currentPiece.name}</h3>
+      <h3 key={currentPiece.slug}>Spotlight: @{currentPiece.artist}</h3>
     </>
   );
 }
