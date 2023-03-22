@@ -1,23 +1,19 @@
 import Link from "next/link";
 import ArtPiecePreview from "../ArtPiecePreview";
-import FavouriteButton from "../FavouriteButton";
+import FavoriteButton from "../FavoriteButton";
 
-export default function ArtPieces({
-  pieces,
-  onToggleFavourite,
-  artPiecesInfo,
-}) {
+export default function ArtPieces({ pieces, onToggleFavorite, artPiecesInfo }) {
   return (
     <>
       {pieces.map((piece) => {
         return (
           <div key={piece.slug}>
-            <FavouriteButton
-              onToggleFavourite={onToggleFavourite}
+            <FavoriteButton
+              onToggleFavorite={onToggleFavorite}
               slug={piece.slug}
-              isFavourite={
+              isFavorite={
                 artPiecesInfo.find((pieceInfo) => pieceInfo.slug === piece.slug)
-                  ?.isFavourite
+                  ?.isFavorite
               }
             />
             <Link href={`/art-pieces/${piece.slug}`}>
@@ -25,9 +21,6 @@ export default function ArtPieces({
                 imageSource={piece.imageSource}
                 name={piece.name}
                 artist={piece.artist}
-                slug={piece.slug}
-                onToggleFavourite={onToggleFavourite}
-                artPiecesInfo={artPiecesInfo}
               />
             </Link>
           </div>

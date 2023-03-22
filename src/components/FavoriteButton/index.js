@@ -22,16 +22,12 @@ const StyledSvgEmpty = styled.svg`
   height: 30px;
 `;
 
-export default function FavouriteButton({
-  onToggleFavourite,
-  isFavourite,
-  slug,
-}) {
+export default function FavoriteButton({ onToggleFavorite, isFavorite, slug }) {
   return (
-    <StyledButton type="button" onClick={() => onToggleFavourite(slug)}>
-      {isFavourite ? (
+    <StyledButton type="button" onClick={() => onToggleFavorite(slug)}>
+      {isFavorite ? (
         <StyledSvg
-          key="favourite"
+          key="favorite"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -39,7 +35,7 @@ export default function FavouriteButton({
         </StyledSvg>
       ) : (
         <StyledSvgEmpty
-          key="not-favourite"
+          key="not-favorite"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

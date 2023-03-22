@@ -24,45 +24,45 @@ export default function App({ Component, pageProps }) {
     isLoading,
   } = useSWR("https://example-apis.vercel.app/api/art", fetcher);
 
-  const [piecesInfo, updatePiecesInfo] = useImmer([]);
+  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
+  const favoriteSlugs = artPiecesInfo
+    .filter((piece) => piece.isFavorite)
+    .map((favoritePiece) => favoritePiece.slug);
+
+  const favoritePieces = piecesData?.filter((piece) =>
+    favoriteSlugs.includes(piece.slug)
+  );
 
   function handleToggleFavorite(slug) {
-    updatePiecesInfo((draft) => {
+    updateArtPiecesInfo((draft) => {
       const piece = draft.find((piece) => piece.slug === slug);
       if (piece) {
         piece.isFavorite = !piece.isFavorite;
       } else {
-        draft.push({ ...piece, isFavorite: true });
+        draft.push({
+          slug,
+          isFavorite: true,
+        });
       }
     });
   }
 
-  function handleAddComment(slug) {
+  function handleSubmitComment(slug, message) {
     const currentDate = new Date().toLocaleDateString("de-DE");
     const currentTime = new Date().toJSON().slice(11, 19);
-    updatePiecesInfo((draft) => {
-      const piece = draft.find((piece) => piece.slug === slug);
-      if (piece) {
-        piece.comments += {
-          text: comment,
-          date: currentDate,
-          time: currentTime,
-        };
-      } else {
-        draft.push({ ...piece, comments: [] });
-      }
-    });
-  }
-
-  const [artPiecesInfo, updateArtPiecesInfo] = useImmer([]);
-
-  function handleToggleFavourite(slug) {
     updateArtPiecesInfo((draft) => {
       const piece = draft.find((piece) => piece.slug === slug);
       if (piece) {
-        piece.isFavourite = !piece.isFavourite;
+        piece?.comments.push({
+          text: message,
+          date: currentDate,
+          time: currentTime,
+        });
       } else {
-        draft.push({ slug, isFavourite: true });
+        draft.push({
+          slug,
+          comments: [{ text: message, date: currentDate, time: currentTime }],
+        });
       }
     });
   }
@@ -76,9 +76,11 @@ export default function App({ Component, pageProps }) {
       <SWRConfig value={{ fetcher }}>
         <Component
           {...pageProps}
-          pieces={data}
+          pieces={piecesData}
           artPiecesInfo={artPiecesInfo}
-          onToggleFavourite={handleToggleFavourite}
+          onToggleFavorite={handleToggleFavorite}
+          favoritePieces={favoritePieces}
+          onSubmitComment={handleSubmitComment}
         />
       </SWRConfig>
     </Layout>

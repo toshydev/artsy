@@ -1,4 +1,6 @@
-import FavouriteButton from "@/components/FavouriteButton";
+import CommentForm from "@/components/CommentForm";
+import Comments from "@/components/Comments";
+import FavoriteButton from "@/components/FavoriteButton";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -8,18 +10,23 @@ function getNewHeight(width, height, size) {
 }
 
 export default function ArtPieceDetails({
-  pieces,
+  pieces: favoritePieces,
   artPiecesInfo,
-  onToggleFavourite,
+  onToggleFavorite,
+  onSubmitComment,
 }) {
   const router = useRouter();
   const { slug } = router.query;
-  const currentPiece = pieces.find((piece) => {
+  const currentPiece = favoritePieces.find((piece) => {
     return piece.slug === slug;
   });
-  const isFavourite = artPiecesInfo.find(
+  const isFavorite = artPiecesInfo.find(
     (piece) => piece.slug === currentPiece.slug
-  )?.isFavourite;
+  )?.isFavorite;
+  const comments = artPiecesInfo.find(
+    (piece) => piece.slug === currentPiece.slug
+  )?.comments;
+
   return (
     <div>
       <button
@@ -42,9 +49,9 @@ export default function ArtPieceDetails({
           390
         )}
       />
-      <FavouriteButton
-        onToggleFavourite={onToggleFavourite}
-        isFavourite={isFavourite}
+      <FavoriteButton
+        onToggleFavorite={onToggleFavorite}
+        isFavorite={isFavorite}
         slug={currentPiece.slug}
       />
       <ul>
@@ -52,6 +59,8 @@ export default function ArtPieceDetails({
         <li>Year: {currentPiece.year}</li>
         <li>Genre: {currentPiece.genre}</li>
       </ul>
+      <CommentForm onSubmitComment={onSubmitComment} slug={currentPiece.slug} />
+      <Comments comments={comments} />
     </div>
   );
 }

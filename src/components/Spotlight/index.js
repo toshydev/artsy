@@ -1,30 +1,36 @@
 import Image from "next/image";
-import FavouriteButton from "../FavouriteButton";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import FavoriteButton from "../FavoriteButton";
 
-export default function Spotlight({
-  pieces,
-  onToggleFavourite,
-  artPiecesInfo,
-}) {
-  const currentPiece = pieces[Math.floor(Math.random() * pieces.length)];
-  const isFavourite = artPiecesInfo.find(
+export default function Spotlight({ pieces, onToggleFavorite, artPiecesInfo }) {
+  const [randomIndex, setRandomIndex] = useState(0);
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * pieces.length);
+    setRandomIndex(randomIndex);
+  }, [pieces]);
+
+  const currentPiece = pieces[randomIndex];
+  const isFavorite = artPiecesInfo.find(
     (piece) => piece.slug === currentPiece.slug
-  )?.isFavourite;
+  )?.isFavorite;
 
   return (
     <>
-      <Image
-        src={currentPiece.imageSource}
-        alt={currentPiece.name}
-        height={400}
-        width={300}
-      />
-      <FavouriteButton
-        onToggleFavourite={onToggleFavourite}
+      <Link href={`/art-pieces/${currentPiece.slug}`}>
+        <Image
+          src={currentPiece.imageSource}
+          alt={currentPiece.name}
+          height={400}
+          width={300}
+        />
+      </Link>
+      <FavoriteButton
+        onToggleFavorite={onToggleFavorite}
         slug={currentPiece.slug}
-        isFavourite={isFavourite}
+        isFavorite={isFavorite}
       />
-      <h3 key={currentPiece.slug}>Spotlight: @{currentPiece.artist}</h3>
+      <h3>Spotlight: @{currentPiece.artist}</h3>
     </>
   );
 }
