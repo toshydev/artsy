@@ -3,6 +3,19 @@ import Comments from "@/components/Comments";
 import FavoriteButton from "@/components/FavoriteButton";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+import { uid } from "uid";
+
+const StyledColorSection = styled.section`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledColorContainer = styled.div`
+  width: 25px;
+  height: 25px;
+  background: ${(props) => props.color};
+`;
 
 function getNewHeight(width, height, size) {
   const ratio = width / height;
@@ -54,6 +67,12 @@ export default function ArtPieceDetails({
         isFavorite={isFavorite}
         slug={currentPiece.slug}
       />
+      <StyledColorSection>
+        <h4>Colors: </h4>
+        {currentPiece.colors.map((color) => {
+          return <StyledColorContainer key={uid()} color={color} />;
+        })}
+      </StyledColorSection>
       <ul>
         <li>Artist: {currentPiece.artist}</li>
         <li>Year: {currentPiece.year}</li>
