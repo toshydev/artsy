@@ -10,31 +10,39 @@ const StyledButton = styled.button`
 
 const StyledSvg = styled.svg`
   fill: red;
+  background: black;
   width: 30px;
   height: 30px;
 `;
 
 const StyledSvgEmpty = styled.svg`
-  stroke: black;
-  fill: none;
+  fill: white;
+  background: black;
   width: 30px;
   height: 30px;
 `;
 
 export default function FavouriteButton({
   onToggleFavourite,
+  isFavourite,
   slug,
-  artPiecesInfo,
 }) {
-  const isFavourite = artPiecesInfo.find((piece) => piece.slug === slug);
   return (
     <StyledButton type="button" onClick={() => onToggleFavourite(slug)}>
       {isFavourite ? (
-        <StyledSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <StyledSvg
+          key="favourite"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
           <path d={path} />
         </StyledSvg>
       ) : (
-        <StyledSvgEmpty xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <StyledSvgEmpty
+          key="not-favourite"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
           <path d={path} />
         </StyledSvgEmpty>
       )}

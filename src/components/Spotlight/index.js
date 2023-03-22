@@ -7,9 +7,9 @@ export default function Spotlight({
   artPiecesInfo,
 }) {
   const currentPiece = pieces[Math.floor(Math.random() * pieces.length)];
-  /* const isFavourite = artPiecesInfo.find((piece) => {
-    piece.slug === currentPiece.slug;
-  })?.isFavourite; */
+  const isFavourite = artPiecesInfo.find(
+    (piece) => piece.slug === currentPiece.slug
+  )?.isFavourite;
 
   return (
     <>
@@ -22,7 +22,7 @@ export default function Spotlight({
       <FavouriteButton
         onToggleFavourite={onToggleFavourite}
         slug={currentPiece.slug}
-        artPiecesInfo={artPiecesInfo}
+        isFavourite={isFavourite}
       />
       <h3 key={currentPiece.slug}>Spotlight: @{currentPiece.artist}</h3>
     </>
