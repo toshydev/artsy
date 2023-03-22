@@ -16,7 +16,6 @@ const StyledNavLink = styled(Link)`
   text-decoration: none;
   color: unset;
   text-align: center;
-  align-self: center;
   flex-grow: 1;
   height: 100%;
   transition: 0.1s ease-in;

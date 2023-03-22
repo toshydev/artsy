@@ -12,10 +12,24 @@ const StyledHeader = styled.header`
   box-shadow: 0 0 8px;
 `;
 
+const artsyHeading = keyframes`
+0% {
+  color: black;
+}
+
+50% {
+  color: hotpink;
+}
+
+100% {
+  color: black;
+}
+`;
+
 const StyledHeading = styled.h1`
   &::before {
     content: "!";
-    animation: ;
+    animation: ${artsyHeading} 1s infinite;
   }
 `;
 
