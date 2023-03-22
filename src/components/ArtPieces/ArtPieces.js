@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ArtPiecePreview from "../ArtPiecePreview";
+import ArtPiecePreview from "../ArtPiecePreview/ArtPiecePreview";
 
 export default function ArtPieces({ pieces }) {
   return (

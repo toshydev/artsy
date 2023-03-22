@@ -1,4 +1,4 @@
-import ArtPiecePreview from ".";
+import ArtPiecePreview from "./ArtPiecePreview";
 
 import { render, screen } from "@testing-library/react";
 
