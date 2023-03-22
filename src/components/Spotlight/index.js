@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+
 export default function Spotlight({ pieces }) {
   const currentPiece = pieces[Math.floor(Math.random() * pieces.length)];
 
@@ -15,3 +16,4 @@ export default function Spotlight({ pieces }) {
     </>
   );
 }
+
